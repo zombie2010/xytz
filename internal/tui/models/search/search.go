@@ -77,6 +77,8 @@ type ShowResumeListMsg struct{}
 
 type ShowLaterListMsg struct{}
 
+type ShowLocalFilesMsg struct{}   
+
 type ShowNowPlayingMsg struct{}
 
 func NewModel(ctx *appctx.AppContext) Model {
