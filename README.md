@@ -34,6 +34,7 @@ A Beautiful TUI for searching and downloading/playing videos from YouTube and ot
 - Load cookies from your browser or a file for authenticated content
 - Fetch and download Spotify tracks or whole albums (multi-disc aware, tagged, with cover art)
 - Works on Linux, macOS, and Windows
+- now has local file playing
 
 ## Installation
 
