@@ -3,7 +3,7 @@ package config
 func GetDefault() *Config {
 	return &Config{
 		SearchLimit:         25,
-		DefaultDownloadPath: "~/Videos",
+		DefaultDownloadPath: "~/Videos/xytz",
 		SpotifyDownloadPath: "~/Music",
 		DefaultQuality:      "best",
 		SortByDefault:       "relevance",

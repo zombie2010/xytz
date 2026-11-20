@@ -29,7 +29,8 @@ func (m *Model) View() tea.View {
 	case types.StateResumeList:
 		content = m.resumeList.View()
 	case types.StateLaterList:
-		content = m.laterList.View()
+	case types.StateLocalFiles:
+		content = m.localFiles.View()
 	case types.StateLoading:
 		content = m.LoadingView()
 	case types.StateChannelList:

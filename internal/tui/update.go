@@ -18,6 +18,7 @@ import (
 	"github.com/xdagiz/xytz/internal/tui/models/download"
 	"github.com/xdagiz/xytz/internal/tui/models/formatlist"
 	"github.com/xdagiz/xytz/internal/tui/models/laterlist"
+	"github.com/xdagiz/xytz/internal/tui/models/localfiles"
 	"github.com/xdagiz/xytz/internal/tui/models/player"
 	"github.com/xdagiz/xytz/internal/tui/models/playlistlist"
 	"github.com/xdagiz/xytz/internal/tui/models/playlistopts"
@@ -77,8 +78,13 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case search.ShowLaterListMsg:
 		m.transitionTo(types.StateLaterList)
 		return m, laterlist.LoadItems()
+	case localfiles.PlayFileMsg:
+		m.playbackOrigin = types.StateLocalFiles
+		m.transitionTo(types.StateVideoPlaying)
+		return m, m.playURLCmd(msg.Path, "", m.Ctx.Config.Player, types.VideoItem{})
 
 	case search.ShowLocalFilesMsg:
+	m.localFiles = localfiles.NewModel(m.Ctx.Config.GetDownloadPath())
     m.transitionTo(types.StateLocalFiles)
     return m, m.localFiles.Load()   
 
@@ -291,6 +297,9 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.playlistOpts, cmd = m.playlistOpts.Update(msg)
 	case types.StateVideoPlaying:
 		m.player, cmd = m.player.Update(msg)
+	case types.StateLocalFiles:
+		m.localFiles, cmd = m.localFiles.Update(msg)
+	}
 
 	return m, cmd
 }
@@ -309,6 +318,7 @@ func (m *Model) resize(msg tea.WindowSizeMsg) tea.Cmd {
 	m.Search = m.Search.HandleResize(m.Width, contentH)
 	m.resumeList = m.resumeList.HandleResize(m.Width, contentH)
 	m.laterList = m.laterList.HandleResize(m.Width, contentH)
+	m.localFiles = m.localFiles.HandleResize(m.Width, contentH)
 	m.thumbnail.HandleResize(m.Width, contentH)
 	listWidth := m.Width
 	if m.thumbnail.Enabled && m.Width >= 100 {
@@ -1764,6 +1774,13 @@ func (m *Model) onKeyPress(msg tea.KeyPressMsg) tea.Cmd {
 
 	case types.StateLaterList:
 		m.laterList, cmd = m.laterList.Update(msg)
+		return cmd
+	case types.StateLocalFiles:
+		if msg.String() == "b" || msg.String() == "esc" {
+			m.transitionTo(types.StateSearchInput)
+			return textinput.Blink
+		}
+		m.localFiles, cmd = m.localFiles.Update(msg)
 		return cmd
 
 	case types.StateFormatList:

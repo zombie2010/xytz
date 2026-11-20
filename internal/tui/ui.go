@@ -24,7 +24,7 @@ import (
 	"github.com/xdagiz/xytz/internal/tui/models/videolist"
 	"github.com/xdagiz/xytz/internal/types"
 	"github.com/xdagiz/xytz/internal/version"
-	"github.com/zombie2010/xytz/internal/tui/models/localfiles"   
+	"github.com/xdagiz/xytz/internal/tui/models/localfiles"   
 
 	"charm.land/bubbles/v2/help"
 	"charm.land/bubbles/v2/spinner"
