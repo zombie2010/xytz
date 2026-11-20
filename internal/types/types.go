@@ -26,6 +26,7 @@ const (
 	StateSpotifyTrack     State = "spotify_track"
 	StateSpotifyAlbumList State = "spotify_album_list"
 	StateSpotifyDownload  State = "spotify_download"
+	StateLocalFiles 	  State = "iota"
 )
 
 type StartFormatMsg struct {
