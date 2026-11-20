@@ -70,10 +70,9 @@ var AllCommands = []Command{
 		Usage:       "/spotify <url>",
 	},
 	{
-    Name:        "local",
-    Description: "Browse and play downloaded files",
-    Usage:       "/local",
-    HasArg:      false,
+    	Name:        "local",
+    	Description: "Browse and play downloaded files",
+    	Usage:       "/local",
 	},   
 }
 
