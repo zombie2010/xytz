@@ -69,6 +69,12 @@ var AllCommands = []Command{
 		Description: "Fetch and download a Spotify track or album",
 		Usage:       "/spotify <url>",
 	},
+	{
+    Name:        "local",
+    Description: "Browse and play downloaded files",
+    Usage:       "/local",
+    HasArg:      false,
+	},   
 }
 
 type MatchResult struct {
