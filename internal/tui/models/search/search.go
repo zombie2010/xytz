@@ -587,6 +587,9 @@ func (m *Model) executeSlashCommand(slashCmd, query, args string) tea.Cmd {
 		m.Help.Toggle()
 		m.Input.SetValue("")
 
+	case "local":
+    return m, func() tea.Msg { return ShowLocalFilesMsg{} }   
+
 	default:
 		m.ErrMsg = fmt.Sprintf("Unknown command: /%s", slashCmd)
 	}
