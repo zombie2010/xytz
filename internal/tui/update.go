@@ -72,11 +72,15 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	case search.ShowResumeListMsg:
 		m.transitionTo(types.StateResumeList)
-		return m, resumelist.LoadItems()
+		return m, resumelist.LoadItems() 
 
 	case search.ShowLaterListMsg:
 		m.transitionTo(types.StateLaterList)
 		return m, laterlist.LoadItems()
+
+	case search.ShowLocalFilesMsg:
+    m.transitionTo(types.StateLocalFiles)
+    return m, m.localFiles.Load()   
 
 	case search.ShowNowPlayingMsg:
 		return m.showNowPlaying()
@@ -1698,6 +1702,8 @@ func (m *Model) onKeyPress(msg tea.KeyPressMsg) tea.Cmd {
 				cmd = m.cancelSpotifyFetchCmd()
 			case "channels":
 				cmd = m.cancelSearchCmd()
+			case "local":
+				cmd = m.localFiles.Load()
 			default:
 				cmd = m.cancelSearchCmd()
 			}
