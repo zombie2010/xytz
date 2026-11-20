@@ -287,6 +287,8 @@ func (m *Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.playlistOpts, cmd = m.playlistOpts.Update(msg)
 	case types.StateVideoPlaying:
 		m.player, cmd = m.player.Update(msg)
+	case types.StateLocalFiles:
+    m.localFiles, cmd = m.localFiles.Update(msg)
 	}
 
 	return m, cmd
